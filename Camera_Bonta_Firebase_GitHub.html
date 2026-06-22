@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Camere Bontà 3.2</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:#eef3f7;color:#222;padding-bottom:88px}header{background:#0b3d5c;color:white;text-align:center;padding:18px;font-size:28px;font-weight:900}.topbar{display:flex;gap:10px;padding:12px;align-items:center;background:white;box-shadow:0 2px 6px rgba(0,0,0,.08);position:sticky;top:0;z-index:4}.topbar input{margin:0}.dashboard{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:12px}.box{background:white;border-radius:14px;padding:12px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.12)}.box h3{font-size:12px;margin:0 0 5px}.box span{font-size:21px;font-weight:900}.legenda{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;padding:8px}.badge{padding:7px 10px;border-radius:18px;font-weight:800;font-size:13px}.bb{background:#3498db;color:white}.mp{background:#f1c40f;color:#111}.pc{background:#2ecc71;color:white}.vuota{background:#95a5a6;color:white}.pulizia{outline:4px solid #e67e22}.main{display:grid;grid-template-columns:520px 1fr;gap:12px;padding:0 10px}.mappa{background:white;border-radius:16px;padding:18px 10px;box-shadow:0 2px 6px rgba(0,0,0,.12)}.riga{display:flex;gap:12px;justify-content:center;margin-bottom:32px}.riga6{margin-left:170px}.riga78{margin-left:105px}.riga12{justify-content:flex-start;margin-left:22px}.camera{width:110px;height:112px;border-radius:22px;padding:8px;box-shadow:0 3px 10px rgba(0,0,0,.22);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;user-select:none}.numero{font-size:28px;font-weight:900}.nome{font-size:12px;margin-top:5px;font-weight:800;line-height:1.15}.checkout{font-size:10px;margin-top:4px}.panel,.report-card{background:white;border-radius:16px;padding:12px;box-shadow:0 2px 6px rgba(0,0,0,.12);margin:0 10px 12px}.calendar-top{display:flex;gap:8px;align-items:center;margin-bottom:10px}.calendar-top input{margin:0}.calendar{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.day-name{text-align:center;font-weight:900;font-size:12px;color:#0b3d5c}.day{min-height:112px;background:#f7f9fb;border:1px solid #dfe6e9;border-radius:10px;padding:5px;font-size:12px;overflow:auto}.date{font-weight:900;margin-bottom:4px}.event{border-radius:7px;padding:4px;margin:3px 0;font-size:10px;line-height:1.15}.event.bb{background:#3498db;color:white}.event.mp{background:#f1c40f;color:#111}.event.pc{background:#2ecc71;color:white}.inout{font-size:9px;font-weight:900}.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);padding:14px;align-items:center;justify-content:center;z-index:9999}.modal.aperta{display:flex}.modal-content{background:white;border-radius:18px;padding:16px;width:100%;max-width:760px;max-height:92vh;overflow:auto}.modal-content h2{margin-top:0;font-size:20px}label{font-weight:800;font-size:14px}input,select,textarea{width:100%;padding:10px;margin:5px 0 11px;border:1px solid #ccc;border-radius:10px;font-size:16px}button{width:100%;border:0;border-radius:12px;padding:12px;margin-top:8px;background:#0b3d5c;color:white;font-size:15px;font-weight:800;cursor:pointer}.btn-red{background:#c0392b}.btn-grey{background:#6c757d}.btn-green{background:#229954}.btn-orange{background:#e67e22}.small-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.bottom{position:fixed;bottom:0;left:0;right:0;background:white;padding:8px;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;box-shadow:0 -2px 8px rgba(0,0,0,.18);z-index:5}.bottom button{margin:0;font-size:12px;padding:10px 4px}.booking-list{background:#f8f9fa;border-radius:12px;padding:10px;margin:8px 0}.booking-item{background:white;border-radius:10px;padding:10px;margin:8px 0;border-left:5px solid #0b3d5c}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;background:white;font-size:13px}th,td{border:1px solid #ddd;padding:7px;text-align:left;white-space:nowrap}th{background:#0b3d5c;color:white}@media(max-width:950px){.main{display:block}.dashboard{grid-template-columns:repeat(2,1fr)}.topbar{display:block}.bottom{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.camera{width:78px;height:94px;border-radius:18px}.numero{font-size:23px}.nome{font-size:10px}.checkout{font-size:9px}.riga{gap:7px;margin-bottom:28px}.riga6{margin-left:120px}.riga78{margin-left:70px}.riga12{margin-left:10px}.day{min-height:84px;font-size:10px;padding:3px}.event{font-size:9px}}@media print{.topbar,.bottom,.mappa,.calendar-top,button{display:none!important}body{background:white;padding:0}.panel,.report-card{box-shadow:none;margin:0}}
+
+.report-date{
+  text-align:center;
+  font-size:28px;
+  font-weight:900;
+  color:#0b3d5c;
+  margin:8px 0 14px;
+}
+.report-title-big{
+  text-align:center;
+  font-size:30px;
+  font-weight:900;
+  color:#0b3d5c;
+  margin-top:4px;
+}
+.report-subtitle{
+  text-align:center;
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:8px;
+}
+.saldo-ok{
+  background:#d5f5e3;
+  font-weight:900;
+}
+.saldo-ko{
+  background:#fcf3cf;
+  font-weight:900;
+}
+.arrivi-partenze{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin:12px 0;
+}
+.arrivi-partenze .mini{
+  background:#f8f9fa;
+  border-radius:12px;
+  padding:10px;
+}
+@media(max-width:700px){
+  .arrivi-partenze{grid-template-columns:1fr;}
+}
+
+
+.firebase-status{font-size:12px;font-weight:900;padding:7px 10px;border-radius:18px;background:#f1c40f;color:#111;white-space:nowrap}
+.firebase-status.ok{background:#2ecc71;color:white}
+.firebase-status.err{background:#c0392b;color:white}
+</style></head><body>
+<header>🏨 Camere Bontà 3.2</header>
+<div class="topbar"><input id="ricerca" placeholder="Cerca cliente o telefono..."><button id="cercaBtn" style="width:160px;margin:0">Cerca</button><button id="stampaBtn" style="width:160px;margin:0">Stampa/PDF</button><span id="firebaseStatus" class="firebase-status">Firebase offline</span></div>
+<div class="dashboard"><div class="box"><h3>Ospiti oggi</h3><span id="ospitiPresenti">0</span></div><div class="box"><h3>Occupate oggi</h3><span id="camereOccupate">0</span></div><div class="box"><h3>Arrivi oggi</h3><span id="arriviOggi">0</span></div><div class="box"><h3>Partenze oggi</h3><span id="partenzeOggi">0</span></div><div class="box"><h3>Da pulire</h3><span id="daPulire">0</span></div><div class="box"><h3>Da incassare</h3><span id="daIncassare">€0.00</span></div></div>
+<div class="legenda"><div class="badge bb">B&B</div><div class="badge mp">Mezza Pensione</div><div class="badge pc">Pensione Completa</div><div class="badge vuota">Libera</div><div class="badge" style="background:#e67e22;color:white">Bordo arancio = da pulire</div></div>
+<div class="main"><div class="mappa">
+<div class="riga"><div class="camera vuota" data-camera="4"><div class="numero">4</div><div class="nome" id="nome4">Libera</div><div class="checkout" id="checkout4"></div></div><div class="camera vuota" data-camera="5"><div class="numero">5</div><div class="nome" id="nome5">Libera</div><div class="checkout" id="checkout5"></div></div><div class="camera vuota" data-camera="31"><div class="numero">31</div><div class="nome" id="nome31">Libera</div><div class="checkout" id="checkout31"></div></div><div class="camera vuota" data-camera="32"><div class="numero">32</div><div class="nome" id="nome32">Libera</div><div class="checkout" id="checkout32"></div></div></div>
+<div class="riga riga6"><div class="camera vuota" data-camera="6"><div class="numero">6</div><div class="nome" id="nome6">Libera</div><div class="checkout" id="checkout6"></div></div></div>
+<div class="riga riga78"><div class="camera vuota" data-camera="7"><div class="numero">7</div><div class="nome" id="nome7">Libera</div><div class="checkout" id="checkout7"></div></div><div class="camera vuota" data-camera="8"><div class="numero">8</div><div class="nome" id="nome8">Libera</div><div class="checkout" id="checkout8"></div></div></div>
+<div class="riga riga12"><div class="camera vuota" data-camera="1"><div class="numero">1</div><div class="nome" id="nome1">Libera</div><div class="checkout" id="checkout1"></div></div><div class="camera vuota" data-camera="2"><div class="numero">2</div><div class="nome" id="nome2">Libera</div><div class="checkout" id="checkout2"></div></div></div>
+</div><div><div class="panel"><h3>📅 Calendario</h3><div class="calendar-top"><button id="prevMonth" style="width:52px">‹</button><input id="meseCalendario" type="month"><button id="nextMonth" style="width:52px">›</button></div><div class="calendar" id="calendario"></div></div></div></div>
+<div class="report-card" id="reportBox" style="display:none"><h3 id="titoloReport">Report</h3><div id="riepilogoReport"></div><br><div class="table-wrap" id="tabellaReport"></div></div>
+<div class="modal" id="modal"><div class="modal-content"><h2 id="titoloCamera">Camera</h2>
+<label>Nome ospite</label><input id="campoNome"><label>Telefono</label><input id="campoTelefono">
+<div class="small-grid"><div><label>Persone</label><input id="campoPersone" type="number" min="0"></div><div><label>Formula</label><select id="campoFormula"><option value="bb">B&B</option><option value="mp">Mezza Pensione</option><option value="pc">Pensione Completa</option></select></div></div>
+<div class="small-grid"><div><label>Check-in</label><input id="campoCheckin" type="date"></div><div><label>Ora check-in</label><input id="campoOraCheckin" type="time" value="14:00"></div></div>
+<div class="small-grid"><div><label>Check-out</label><input id="campoCheckout" type="date"></div><div><label>Ora check-out</label><input id="campoOraCheckout" type="time" value="13:00"></div></div>
+<div class="small-grid"><div><label>Totale (€)</label><input id="campoTotale" type="number" min="0" step="0.01"></div><div><label>Acconto/Pagato (€)</label><input id="campoAcconto" type="number" min="0" step="0.01"></div></div>
+<label>Saldo da pagare (€)</label><input id="campoSaldo" readonly><label>Pulizia camera</label><select id="campoPulizia"><option value="pulita">Pulita</option><option value="da_pulire">Da pulire</option><option value="preparazione">In preparazione</option></select><label>Note</label><textarea id="campoNote" rows="3"></textarea>
+<button id="salvaBtn">Salva prenotazione</button><button id="nuovaBtn" class="btn-green">Nuova prenotazione</button><button id="pulitaBtn" class="btn-orange">Segna camera pulita</button><button id="eliminaBtn" class="btn-red">Elimina prenotazione selezionata</button><button id="chiudiBtn" class="btn-grey">Chiudi</button>
+<div class="booking-list"><b>Prenotazioni di questa camera</b><div id="listaPrenotazioni"></div></div></div></div>
+<div class="bottom"><button id="reportOggiBtn">Report oggi</button><button id="exportOggiBtn">Export oggi</button><button id="cassaBtn">Cassa oggi</button><button id="reportMeseBtn">Report mese</button><button id="excelBtn">Excel</button><button id="backupBtn">Backup</button></div>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
+<script>
+/* ================= FIREBASE =================
+   1) Crea un progetto su Firebase
+   2) Attiva Realtime Database
+   3) Sostituisci i valori qui sotto con quelli del tuo progetto
+   4) Carica questo file su GitHub come index.html
+*/
+const firebaseConfig = {
+  apiKey: "INCOLLA_QUI_API_KEY",
+  authDomain: "INCOLLA_QUI_AUTH_DOMAIN",
+  databaseURL: "INCOLLA_QUI_DATABASE_URL",
+  projectId: "INCOLLA_QUI_PROJECT_ID",
+  storageBucket: "INCOLLA_QUI_STORAGE_BUCKET",
+  messagingSenderId: "INCOLLA_QUI_MESSAGING_SENDER_ID",
+  appId: "INCOLLA_QUI_APP_ID"
+};
+const FIREBASE_PATH = "camere_bonta";
+let firebaseReady = false;
+let firebaseRef = null;
+let caricamentoFirebase = true;
+
+function aggiornaStatoFirebase(testo, tipo){
+  const el = document.getElementById("firebaseStatus");
+  if(!el) return;
+  el.textContent = testo;
+  el.classList.remove("ok","err");
+  if(tipo) el.classList.add(tipo);
+}
+function firebaseConfigurato(){
+  return firebaseConfig.apiKey && !firebaseConfig.apiKey.includes("INCOLLA_QUI");
+}
+function avviaFirebase(){
+  if(!firebaseConfigurato()){
+    aggiornaStatoFirebase("Firebase da configurare", "err");
+    caricamentoFirebase = false;
+    return;
+  }
+  try{
+    firebase.initializeApp(firebaseConfig);
+    firebaseRef = firebase.database().ref(FIREBASE_PATH);
+    firebaseReady = true;
+    aggiornaStatoFirebase("Firebase collegato", "ok");
+
+    firebaseRef.on("value", snap => {
+      const cloud = snap.val();
+      if(cloud && cloud.prenotazioni && cloud.pulizie){
+        datiCamere = cloud.prenotazioni;
+        statoPulizie = cloud.pulizie;
+        camere.forEach(c=>{
+          if(!Array.isArray(datiCamere[c])) datiCamere[c]=[];
+          if(!statoPulizie[c]) statoPulizie[c]="pulita";
+        });
+        localStorage.setItem("camere_bonta_v3", JSON.stringify(datiCamere));
+        localStorage.setItem("camere_bonta_pulizie_v3", JSON.stringify(statoPulizie));
+        aggiornaTutto();
+      }else{
+        firebaseRef.set({prenotazioni:datiCamere,pulizie:statoPulizie,aggiornato:new Date().toISOString()});
+      }
+      caricamentoFirebase = false;
+    });
+  }catch(e){
+    console.error(e);
+    aggiornaStatoFirebase("Errore Firebase", "err");
+    caricamentoFirebase = false;
+  }
+}
+
+let cameraSelezionata=null,bookingSelezionato=null;const camere=["1","2","31","32","4","5","6","7","8"],capienze={"1":"Matrimoniale o doppia - 2 posti","2":"1 matrimoniale + 2 singoli - 4 posti","31":"1 matrimoniale + 2 singoli - 4 posti","32":"1 matrimoniale + 2 singoli - 4 posti","4":"3 singoli - 3 posti","5":"1 matrimoniale + 2 singoli - 4 posti","6":"Quintupla: 1 matrimoniale + 3 singoli - 5 posti","7":"3 singoli - 3 posti","8":"3 singoli - 3 posti"};
+let datiCamere=JSON.parse(localStorage.getItem("camere_bonta_v3")||localStorage.getItem("camere_bonta_v2")||"{}"),statoPulizie=JSON.parse(localStorage.getItem("camere_bonta_pulizie_v3")||localStorage.getItem("camere_bonta_pulizie")||"{}");camere.forEach(c=>{if(!Array.isArray(datiCamere[c]))datiCamere[c]=[];if(!statoPulizie[c])statoPulizie[c]="pulita"});
+function oggiISO(){return new Date().toISOString().slice(0,10)}function dataFile(){return new Date().toISOString().slice(0,10)}function euro(n){return"€"+Number(n||0).toFixed(2)}function formattaData(d){if(!d)return"";let p=d.split("-");return p[2]+"/"+p[1]+"/"+p[0]}function nomeFormula(f){return f==="bb"?"B&B":f==="mp"?"Mezza Pensione":f==="pc"?"Pensione Completa":""}function salvaDB(){localStorage.setItem("camere_bonta_v3",JSON.stringify(datiCamere));localStorage.setItem("camere_bonta_pulizie_v3",JSON.stringify(statoPulizie));if(firebaseReady&&firebaseRef&&!caricamentoFirebase){firebaseRef.set({prenotazioni:datiCamere,pulizie:statoPulizie,aggiornato:new Date().toISOString()})}}function generaId(){return"b"+Date.now()+Math.random().toString(16).slice(2)}function bookingNelGiorno(b,d){return b&&b.nome&&b.checkin&&b.checkout&&d>=b.checkin&&d<=b.checkout}function bookingAttivoOggi(c){let t=oggiISO();return(datiCamere[c]||[]).find(b=>bookingNelGiorno(b,t))}function calcolaSaldo(){campoSaldo.value=(Number(campoTotale.value||0)-Number(campoAcconto.value||0)).toFixed(2)}
+function pulisciForm(){bookingSelezionato=null;campoNome.value="";campoTelefono.value="";campoPersone.value="";campoCheckin.value="";campoOraCheckin.value="14:00";campoCheckout.value="";campoOraCheckout.value="13:00";campoFormula.value="bb";campoTotale.value="";campoAcconto.value="";campoSaldo.value="";campoPulizia.value=statoPulizie[cameraSelezionata]||"pulita";campoNote.value=""}
+function apriCamera(n){cameraSelezionata=n;titoloCamera.innerText="Camera "+n+" - "+capienze[n];let a=bookingAttivoOggi(n);a?caricaBooking(a.id):pulisciForm();aggiornaListaPrenotazioni();modal.classList.add("aperta")}
+function caricaBooking(id){let b=(datiCamere[cameraSelezionata]||[]).find(x=>x.id===id);if(!b)return;bookingSelezionato=id;campoNome.value=b.nome||"";campoTelefono.value=b.telefono||"";campoPersone.value=b.persone||"";campoCheckin.value=b.checkin||"";campoOraCheckin.value=b.oraCheckin||"14:00";campoCheckout.value=b.checkout||"";campoOraCheckout.value=b.oraCheckout||"13:00";campoFormula.value=b.formula||"bb";campoTotale.value=b.totale||"";campoAcconto.value=b.acconto||"";campoPulizia.value=statoPulizie[cameraSelezionata]||"pulita";campoNote.value=b.note||"";calcolaSaldo()}function chiudiCamera(){modal.classList.remove("aperta")}
+function verificaConflitto(nuovo){for(let b of datiCamere[cameraSelezionata]){if(bookingSelezionato&&b.id===bookingSelezionato)continue;let sov=nuovo.checkin<=b.checkout&&nuovo.checkout>=b.checkin,cambio=nuovo.checkin===b.checkout||nuovo.checkout===b.checkin;if(sov&&!cambio)return"Camera già occupata dal "+formattaData(b.checkin)+" al "+formattaData(b.checkout)+" da "+b.nome+"."}return""}
+function salvaCamera(){if(!cameraSelezionata)return;let nuovo={id:bookingSelezionato||generaId(),nome:campoNome.value.trim(),telefono:campoTelefono.value.trim(),persone:campoPersone.value,checkin:campoCheckin.value,oraCheckin:campoOraCheckin.value||"14:00",checkout:campoCheckout.value,oraCheckout:campoOraCheckout.value||"13:00",formula:campoFormula.value,totale:campoTotale.value,acconto:campoAcconto.value,note:campoNote.value.trim()};if(!nuovo.nome){alert("Inserisci nome ospite.");return}if(!nuovo.checkin||!nuovo.checkout){alert("Inserisci check-in e check-out.");return}if(nuovo.checkout<nuovo.checkin){alert("Check-out non valido.");return}let conf=verificaConflitto(nuovo);if(conf&&!confirm(conf+"\n\nVuoi salvarla comunque?"))return;let lista=datiCamere[cameraSelezionata],idx=lista.findIndex(b=>b.id===nuovo.id);idx>=0?lista[idx]=nuovo:lista.push(nuovo);lista.sort((a,b)=>(a.checkin||"").localeCompare(b.checkin||""));statoPulizie[cameraSelezionata]=campoPulizia.value;bookingSelezionato=nuovo.id;salvaDB();aggiornaTutto();aggiornaListaPrenotazioni();alert("Prenotazione salvata.")}
+function eliminaBooking(){if(!cameraSelezionata||!bookingSelezionato){alert("Seleziona una prenotazione.");return}if(confirm("Eliminare questa prenotazione?")){datiCamere[cameraSelezionata]=datiCamere[cameraSelezionata].filter(b=>b.id!==bookingSelezionato);bookingSelezionato=null;salvaDB();pulisciForm();aggiornaTutto();aggiornaListaPrenotazioni()}}function segnaPulita(){if(!cameraSelezionata)return;statoPulizie[cameraSelezionata]="pulita";campoPulizia.value="pulita";salvaDB();aggiornaTutto()}
+function aggiornaListaPrenotazioni(){let lista=datiCamere[cameraSelezionata]||[];listaPrenotazioni.innerHTML="";if(lista.length===0){listaPrenotazioni.innerHTML="<p>Nessuna prenotazione.</p>";return}lista.forEach(b=>{let saldo=Number(b.totale||0)-Number(b.acconto||0),div=document.createElement("div");div.className="booking-item";div.innerHTML="<b>"+b.nome+"</b><br>"+nomeFormula(b.formula)+" - "+(b.persone||0)+" persone<br>Dal "+formattaData(b.checkin)+" ore "+(b.oraCheckin||"14:00")+"<br>Al "+formattaData(b.checkout)+" ore "+(b.oraCheckout||"13:00")+"<br>Da pagare: "+euro(saldo);div.onclick=()=>caricaBooking(b.id);listaPrenotazioni.appendChild(div)})}
+function aggiornaMappa(){camere.forEach(n=>{let b=bookingAttivoOggi(n),box=document.querySelector('[data-camera="'+n+'"]'),nomeEl=document.getElementById("nome"+n),outEl=document.getElementById("checkout"+n);box.classList.remove("bb","mp","pc","vuota","pulizia");if(b){box.classList.add(b.formula||"bb");nomeEl.innerText=b.nome+" - "+(b.persone||0)+" pers.";outEl.innerText="Out: "+formattaData(b.checkout)+" "+(b.oraCheckout||"13:00")}else{box.classList.add("vuota");nomeEl.innerText="Libera";outEl.innerText=""}if(statoPulizie[n]==="da_pulire"||statoPulizie[n]==="preparazione")box.classList.add("pulizia")})}
+function aggiornaDashboard(){let ospiti=0,occ=0,arrivi=0,partenze=0,pulizie=0,daPagare=0,oggi=oggiISO();camere.forEach(c=>{if(statoPulizie[c]==="da_pulire"||statoPulizie[c]==="preparazione")pulizie++;let attiva=false;(datiCamere[c]||[]).forEach(b=>{if(!b.nome)return;let saldo=Number(b.totale||0)-Number(b.acconto||0);if(bookingNelGiorno(b,oggi)){ospiti+=Number(b.persone||0);daPagare+=saldo;attiva=true}if(b.checkin===oggi)arrivi++;if(b.checkout===oggi)partenze++});if(attiva)occ++});ospitiPresenti.innerText=ospiti;camereOccupate.innerText=occ;arriviOggi.innerText=arrivi;partenzeOggi.innerText=partenze;daPulire.innerText=pulizie;daIncassare.innerText=euro(daPagare)}
+function disegnaCalendario(){let val=meseCalendario.value;if(!val)return;let[anno,mese]=val.split("-").map(Number),mese0=mese-1,primo=new Date(anno,mese0,1),startOffset=(primo.getDay()+6)%7,giorni=new Date(anno,mese0+1,0).getDate();calendario.innerHTML="";["Lun","Mar","Mer","Gio","Ven","Sab","Dom"].forEach(g=>{let e=document.createElement("div");e.className="day-name";e.innerText=g;calendario.appendChild(e)});for(let i=0;i<startOffset;i++){let e=document.createElement("div");e.className="day";e.style.visibility="hidden";calendario.appendChild(e)}for(let giorno=1;giorno<=giorni;giorno++){let data=anno+"-"+String(mese).padStart(2,"0")+"-"+String(giorno).padStart(2,"0"),cell=document.createElement("div");cell.className="day";cell.innerHTML="<div class='date'>"+giorno+"</div>";camere.forEach(c=>(datiCamere[c]||[]).forEach(b=>{if(!bookingNelGiorno(b,data))return;let ev=document.createElement("div");ev.className="event "+(b.formula||"bb");let extra="";if(b.checkin===data)extra+="<div class='inout'>IN "+(b.oraCheckin||"14:00")+"</div>";if(b.checkout===data)extra+="<div class='inout'>OUT "+(b.oraCheckout||"13:00")+"</div>";ev.innerHTML="<b>C."+c+"</b> "+b.nome+"<br>"+nomeFormula(b.formula)+extra;ev.onclick=()=>{apriCamera(c);caricaBooking(b.id)};cell.appendChild(ev)}));calendario.appendChild(cell)}}
+function tuttePrenotazioni(){let out=[];camere.forEach(c=>(datiCamere[c]||[]).forEach(b=>out.push({...b,camera:c})));return out.sort((a,b)=>(a.checkin||"").localeCompare(b.checkin||""))}function filtraOggi(){let oggi=oggiISO();return tuttePrenotazioni().filter(b=>bookingNelGiorno(b,oggi))}function filtraMese(){let m=meseCalendario.value;return tuttePrenotazioni().filter(b=>(b.checkin||"").startsWith(m)||(b.checkout||"").startsWith(m)||(b.checkin<=m+"-31"&&b.checkout>=m+"-01"))}function filtraClienti(){let q=ricerca.value.trim().toLowerCase();return tuttePrenotazioni().filter(b=>(b.nome||"").toLowerCase().includes(q)||(b.telefono||"").toLowerCase().includes(q))}
+
+function dataLungaIt(dataISO){
+  let d = dataISO ? new Date(dataISO + "T12:00:00") : new Date();
+  return d.toLocaleDateString("it-IT", {weekday:"long", day:"numeric", month:"long", year:"numeric"});
+}
+
+function creaArriviPartenzeHTML(){
+  let oggi = oggiISO();
+  let arrivi = [];
+  let partenze = [];
+
+  tuttePrenotazioni().forEach(b=>{
+    if(b.checkin === oggi){
+      arrivi.push("Camera " + b.camera + " - " + b.nome + " - IN " + (b.oraCheckin || "14:00"));
+    }
+    if(b.checkout === oggi){
+      partenze.push("Camera " + b.camera + " - " + b.nome + " - OUT " + (b.oraCheckout || "13:00"));
+    }
+  });
+
+  let html = "<div class='arrivi-partenze'>";
+  html += "<div class='mini'><b>ARRIVI OGGI</b><br>" + (arrivi.length ? arrivi.join("<br>") : "Nessun arrivo") + "</div>";
+  html += "<div class='mini'><b>PARTENZE OGGI</b><br>" + (partenze.length ? partenze.join("<br>") : "Nessuna partenza") + "</div>";
+  html += "</div>";
+  return html;
+}
+
+function calcolaOccupazioneOggi(){
+  let oggi = oggiISO();
+  let occupate = 0;
+  camere.forEach(c=>{
+    if((datiCamere[c] || []).some(b=>bookingNelGiorno(b, oggi))) occupate++;
+  });
+  let percentuale = Math.round((occupate / camere.length) * 100);
+  return "Camere occupate: " + occupate + "/" + camere.length + " - Occupazione: " + percentuale + "%";
+}
+
+function righeTabella(lista){let totale=0,acconti=0,saldi=0,ospiti=0,html="<table><thead><tr><th>Camera</th><th>Ospite</th><th>Telefono</th><th>Formula</th><th>Persone</th><th>Check-in</th><th>Check-out</th><th>Totale</th><th>Pagato</th><th>Da pagare</th><th>Note</th></tr></thead><tbody>";lista.forEach(b=>{let t=Number(b.totale||0),a=Number(b.acconto||0),s=t-a;totale+=t;acconti+=a;saldi+=s;ospiti+=Number(b.persone||0);html+="<tr><td>"+b.camera+"</td><td>"+b.nome+"</td><td>"+(b.telefono||"")+"</td><td>"+nomeFormula(b.formula)+"</td><td>"+(b.persone||0)+"</td><td>"+formattaData(b.checkin)+" "+(b.oraCheckin||"14:00")+"</td><td>"+formattaData(b.checkout)+" "+(b.oraCheckout||"13:00")+"</td><td>"+euro(t)+"</td><td>"+euro(a)+"</td><td class='"+(s<=0?"saldo-ok":"saldo-ko")+"'>"+euro(s)+"</td><td>"+(b.note||"")+"</td></tr>"});html+="</tbody></table>";return{html,totale,acconti,saldi,ospiti,count:lista.length}}
+function mostraReport(titolo,lista){
+let r=righeTabella(lista);
+titoloReport.innerHTML="<div class='report-title-big'>CAMERE BONTÀ</div><div class='report-subtitle'>"+titolo+"</div>";
+let bloccoData="";
+if(titolo.toLowerCase().includes("giornaliero") || titolo.toLowerCase().includes("cassa")){
+  bloccoData="<div class='report-date'>"+dataLungaIt(oggiISO())+"</div>"+creaArriviPartenzeHTML()+"<b>"+calcolaOccupazioneOggi()+"</b><br><br>";
+}
+riepilogoReport.innerHTML=bloccoData+"<b>Prenotazioni:</b> "+r.count+" &nbsp; <b>Ospiti:</b> "+r.ospiti+" &nbsp; <b>Totale:</b> "+euro(r.totale)+" &nbsp; <b>Pagato:</b> "+euro(r.acconti)+" &nbsp; <b>Da riscuotere:</b> "+euro(r.saldi);
+tabellaReport.innerHTML=r.html;
+reportBox.style.display="block";
+reportBox.scrollIntoView({behavior:"smooth"});
+}
+function cassaOggi(){mostraReport("Cassa giornaliera",filtraOggi().filter(b=>Number(b.acconto||0)>0||Number(b.totale||0)-Number(b.acconto||0)>0))}
+function esportaExcel(){let source=filtraMese(),html="<html><head><meta charset='UTF-8'></head><body><h2>Camere Bontà - Report "+meseCalendario.value+"</h2>"+righeTabella(source).html+"</body></html>",file=new Blob([html],{type:"application/vnd.ms-excel;charset=utf-8"}),a=document.createElement("a");a.href=URL.createObjectURL(file);a.download="report_camere_bonta_"+meseCalendario.value+".xls";a.click()}
+
+function esportaReportGiornalieroExcel(){
+  let lista = filtraOggi();
+  let r = righeTabella(lista);
+  let htmlExcel = "<html><head><meta charset='UTF-8'></head><body>";
+  htmlExcel += "<h2>CAMERE BONTÀ - REPORT GIORNALIERO</h2>";
+  htmlExcel += "<p>Data: " + formattaData(oggiISO()) + "</p>";
+  htmlExcel += r.html;
+  htmlExcel += "<br><b>Prenotazioni:</b> " + r.count;
+  htmlExcel += "<br><b>Ospiti:</b> " + r.ospiti;
+  htmlExcel += "<br><b>Totale soggiorni:</b> " + euro(r.totale);
+  htmlExcel += "<br><b>Pagato:</b> " + euro(r.acconti);
+  htmlExcel += "<br><b>Da riscuotere:</b> " + euro(r.saldi);
+  htmlExcel += "</body></html>";
+  let file = new Blob([htmlExcel], {type:"application/vnd.ms-excel;charset=utf-8"});
+  let a = document.createElement("a");
+  a.href = URL.createObjectURL(file);
+  a.download = "report_giornaliero_camere_bonta_" + oggiISO() + ".xls";
+  a.click();
+}
+
+function esportaReportGiornalieroPDF(){
+  mostraReport("Report giornaliero", filtraOggi());
+  setTimeout(function(){ window.print(); }, 400);
+}
+
+function backup(){let contenuto=JSON.stringify({prenotazioni:datiCamere,pulizie:statoPulizie},null,2),file=new Blob([contenuto],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(file);a.download="backup_camere_bonta_"+dataFile()+".json";a.click()}function cambiaMese(delta){let[anno,mese]=meseCalendario.value.split("-").map(Number),d=new Date(anno,mese-1+delta,1);meseCalendario.value=d.toISOString().slice(0,7);disegnaCalendario()}function aggiornaTutto(){aggiornaMappa();aggiornaDashboard();disegnaCalendario()}
+document.querySelectorAll(".camera").forEach(el=>el.addEventListener("click",()=>apriCamera(el.dataset.camera)));campoTotale.addEventListener("input",calcolaSaldo);campoAcconto.addEventListener("input",calcolaSaldo);salvaBtn.addEventListener("click",salvaCamera);nuovaBtn.addEventListener("click",pulisciForm);pulitaBtn.addEventListener("click",segnaPulita);eliminaBtn.addEventListener("click",eliminaBooking);chiudiBtn.addEventListener("click",chiudiCamera);reportOggiBtn.addEventListener("click",()=>mostraReport("Report giornaliero",filtraOggi()));exportOggiBtn.addEventListener("click",()=>{mostraReport("Report giornaliero",filtraOggi());esportaReportGiornalieroExcel();});cassaBtn.addEventListener("click",cassaOggi);reportMeseBtn.addEventListener("click",()=>mostraReport("Report mensile",filtraMese()));excelBtn.addEventListener("click",esportaExcel);backupBtn.addEventListener("click",backup);cercaBtn.addEventListener("click",()=>mostraReport("Risultati ricerca",filtraClienti()));ricerca.addEventListener("keydown",e=>{if(e.key==="Enter")mostraReport("Risultati ricerca",filtraClienti())});stampaBtn.addEventListener("click",()=>{
+  mostraReport("Report giornaliero",filtraOggi());
+
+  setTimeout(function(){
+    const report = document.getElementById("reportBox").innerHTML;
+    const finestra = window.open("", "", "width=1200,height=800");
+
+    finestra.document.write(`
+      <html>
+      <head>
+        <title>Report Giornaliero - Camere Bontà</title>
+        <style>
+          body{
+            font-family: Arial, sans-serif;
+            padding:20px;
+            color:#222;
+          }
+          h3{
+            font-size:24px;
+            margin-bottom:10px;
+          }
+          table{
+            width:100%;
+            border-collapse:collapse;
+            font-size:13px;
+          }
+          th,td{
+            border:1px solid #333;
+            padding:8px;
+            text-align:left;
+          }
+          th{
+            background:#0b3d5c;
+            color:white;
+          }
+          .report-title-big{
+            text-align:center;
+            font-size:30px;
+            font-weight:900;
+            color:#0b3d5c;
+          }
+          .report-subtitle{
+            text-align:center;
+            font-size:20px;
+            font-weight:800;
+            margin-bottom:8px;
+          }
+          .report-date{
+            text-align:center;
+            font-size:28px;
+            font-weight:900;
+            color:#0b3d5c;
+            margin:8px 0 14px;
+          }
+          .arrivi-partenze{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:12px;
+            margin:12px 0;
+          }
+          .mini{
+            background:#f8f9fa;
+            border-radius:12px;
+            padding:10px;
+          }
+          .saldo-ok{
+            background:#d5f5e3;
+            font-weight:900;
+          }
+          .saldo-ko{
+            background:#fcf3cf;
+            font-weight:900;
+          }
+          @media print{
+            body{padding:10px;}
+          }
+        </style>
+      </head>
+      <body>
+        ${report}
+      </body>
+      </html>
+    `);
+
+    finestra.document.close();
+    finestra.focus();
+    setTimeout(function(){ finestra.print(); }, 300);
+  }, 300);
+});meseCalendario.addEventListener("change",disegnaCalendario);prevMonth.addEventListener("click",()=>cambiaMese(-1));nextMonth.addEventListener("click",()=>cambiaMese(1));meseCalendario.value=new Date().toISOString().slice(0,7);aggiornaTutto();avviaFirebase();
+</script></body></html>
