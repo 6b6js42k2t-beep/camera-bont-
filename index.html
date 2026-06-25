@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="it"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Camere Bontà 5.0</title>
+<title>Camere Bontà 7.0</title>
 <style>
 *{box-sizing:border-box}
 body{margin:0;font-family:-apple-system,BlinkMacSystemFont,Arial,sans-serif;background:linear-gradient(180deg,#e8f2f8 0%,#f7fafc 42%,#eef3f7 100%);color:#222;padding-bottom:96px}
@@ -177,6 +177,162 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
 }
 </style>
 
+
+<style>
+/* Camere Bontà 5.2 FIX - calendario grande, mappa compatta */
+.workspace{display:grid !important;grid-template-columns:300px minmax(0,1fr) !important;gap:16px !important;align-items:start !important}.side-column{min-width:0 !important}.card-mappa{padding:10px !important;max-width:300px !important}.card-mappa .section-title{font-size:17px !important;margin:0 0 8px 4px !important}.legenda-mappa{justify-content:flex-start !important;gap:5px !important;padding:0 0 8px !important}.legenda-mappa .badge{font-size:10px !important;padding:5px 7px !important;border-radius:12px !important}.card-mappa .riga{gap:5px !important;margin-bottom:12px !important}.card-mappa .riga6{margin-left:86px !important}.card-mappa .riga78{margin-left:48px !important}.card-mappa .riga12{margin-left:0 !important;justify-content:flex-start !important}.card-mappa .camera{width:62px !important;height:68px !important;border-radius:14px !important;padding:4px !important}.card-mappa .numero{font-size:19px !important}.card-mappa .nome{font-size:8px !important;line-height:1.05 !important;margin-top:2px !important}.card-mappa .checkout{display:none !important}.calendar-card{padding:16px !important;width:100% !important}.calendar-card h3{font-size:24px !important;margin-bottom:12px !important}.calendar-top{margin-bottom:12px !important}.calendar-top button{width:56px !important;padding:12px !important;font-size:22px !important}.calendar-top input{height:48px !important;font-size:18px !important}.calendar{gap:8px !important;width:100% !important}.day-name{font-size:14px !important;padding-bottom:4px !important}.day{min-height:126px !important;font-size:13px !important;padding:7px !important;border-radius:13px !important;overflow:auto !important}.date{font-size:15px !important;margin-bottom:5px !important}.event{display:block !important;width:100% !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;font-size:11px !important;line-height:1.15 !important;padding:4px 5px !important;margin:3px 0 !important;border-radius:7px !important}
+@media(max-width:980px){.workspace{display:flex !important;flex-direction:column !important;gap:12px !important}.card-mappa{max-width:none !important;width:100% !important}.card-mappa .camera{width:58px !important;height:62px !important}.card-mappa .riga{margin-bottom:10px !important}.card-mappa .riga6{margin-left:80px !important}.card-mappa .riga78{margin-left:46px !important}.calendar-card{width:100% !important;padding:12px !important}.calendar{gap:5px !important}.day{min-height:104px !important;padding:5px !important}.day-name{font-size:12px !important}.date{font-size:13px !important}.event{font-size:10px !important;padding:3px 4px !important}}
+@media(max-width:520px){.app-shell{padding:0 6px 12px !important}.calendar-card{padding:8px !important;border-radius:16px !important}.calendar-top button{width:42px !important;padding:9px !important;font-size:18px !important}.calendar-top input{height:42px !important;font-size:16px !important}.calendar{gap:3px !important}.day{min-height:92px !important;padding:3px !important;border-radius:9px !important}.day-name{font-size:10px !important}.date{font-size:12px !important;margin-bottom:3px !important}.event{font-size:9px !important;padding:3px !important;margin:2px 0 !important}.card-mappa .camera{width:50px !important;height:56px !important;border-radius:12px !important}.card-mappa .numero{font-size:16px !important}.card-mappa .nome{font-size:7px !important}.card-mappa .riga{gap:4px !important;margin-bottom:8px !important}.card-mappa .riga6{margin-left:68px !important}.card-mappa .riga78{margin-left:40px !important}}
+</style>
+
+<style>
+/* Modifica 5.7 */
+.card-mappa,.mappa{display:none !important;}
+.workspace{grid-template-columns:1fr !important;}
+.occ-rooms .room-dot.bb{background:#3498db!important;color:#fff!important;}
+.occ-rooms .room-dot.mp{background:#f1c40f!important;color:#111!important;}
+.occ-rooms .room-dot.pc{background:#2ecc71!important;color:#fff!important;}
+.occ-rooms .room-dot.free{background:#dfe6e9!important;color:#555!important;}
+.formula-legenda{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px}
+.formula-legenda span{padding:6px 10px;border-radius:999px;font-weight:bold}
+.formula-legenda .bb{background:#3498db;color:#fff}
+.formula-legenda .mp{background:#f1c40f;color:#111}
+.formula-legenda .pc{background:#2ecc71;color:#fff}
+.formula-legenda .fr{background:#dfe6e9;color:#333}
+</style>
+
+
+<style id="camere-bonta-6-2-fix-definitivo">
+/* FIX DEFINITIVO: file apribile + calendario grande */
+.card-mappa,.mappa{display:none!important;}
+.workspace{display:block!important;width:100%!important;}
+.side-column{width:100%!important;max-width:none!important;}
+.calendar-card{width:100%!important;margin:0!important;padding:18px!important;}
+.calendar{grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:8px!important;width:100%!important;}
+.day{min-height:150px!important;padding:8px!important;border-radius:14px!important;overflow:auto!important;}
+.day-name{font-size:15px!important;padding:6px 0!important;}
+.date{font-size:16px!important;margin-bottom:6px!important;}
+.event{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;font-size:12px!important;line-height:1.15!important;padding:5px 6px!important;margin:3px 0!important;}
+.room-dot.bb{background:#3498db!important;color:#fff!important;}
+.room-dot.mp{background:#f1c40f!important;color:#111!important;}
+.room-dot.pc{background:#2ecc71!important;color:#fff!important;}
+.room-dot.free{background:#dfe6e9!important;color:#555!important;}
+@media(max-width:520px){
+ .app-shell{padding-left:4px!important;padding-right:4px!important;}
+ .calendar-card{padding:6px!important;border-radius:16px!important;}
+ .calendar{gap:2px!important;}
+ .day{min-height:118px!important;padding:3px!important;border-radius:7px!important;}
+ .day-name{font-size:10px!important;}
+ .date{font-size:12px!important;margin-bottom:3px!important;}
+ .event{font-size:9px!important;padding:3px!important;margin:2px 0!important;letter-spacing:-.2px!important;}
+}
+</style>
+<style>
+/* Camere Bontà 6.3 - legenda visibile sopra il calendario */
+.calendar-legend{
+  display:flex!important;
+  gap:8px!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  margin:0 0 12px!important;
+  padding:10px!important;
+  background:#f5f7f2!important;
+  border:1px solid rgba(31,94,59,.12)!important;
+  border-radius:14px!important;
+}
+.calendar-legend .legend-title{font-weight:950;color:#0f3d25;margin-right:4px;font-size:14px}
+.calendar-legend .badge{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  padding:7px 11px!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  white-space:nowrap!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)!important;
+}
+@media(max-width:520px){
+  .calendar-legend{gap:5px!important;padding:7px!important;margin-bottom:8px!important}
+  .calendar-legend .legend-title{width:100%;font-size:12px}
+  .calendar-legend .badge{font-size:10px!important;padding:5px 7px!important}
+}
+</style>
+
+<style>
+/* Camere Bontà 7.0 - pulsante Azioni nel riquadro data/ora */
+.search-card-solo-cerca{grid-template-columns:1fr 120px !important;}
+.top-strip{position:relative !important;}
+.top-actions{
+  position:relative;
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  z-index:20;
+}
+.azioni-btn{
+  width:auto !important;
+  min-width:132px !important;
+  height:48px !important;
+  border-radius:999px !important;
+  margin:0 !important;
+  padding:0 18px !important;
+  background:linear-gradient(135deg,#0f3d25,#1f5e3b) !important;
+  color:#fff !important;
+  font-size:15px !important;
+  font-weight:950 !important;
+  letter-spacing:.2px !important;
+  line-height:1 !important;
+  box-shadow:0 10px 24px rgba(31,94,59,.22) !important;
+  border:1px solid rgba(255,255,255,.45) !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  gap:7px !important;
+}
+.azioni-btn:active{transform:scale(.98)}
+.more-panel{
+  display:none;
+  position:absolute;
+  right:0;
+  top:58px;
+  min-width:230px;
+  background:#fffdf8;
+  border:1px solid rgba(31,94,59,.14);
+  border-radius:20px;
+  padding:10px;
+  box-shadow:0 18px 42px rgba(0,0,0,.22);
+  z-index:99999;
+}
+.more-panel.aperto{display:grid;gap:8px;}
+.more-panel button{
+  margin:0 !important;
+  width:100% !important;
+  text-align:left !important;
+  padding:12px 14px !important;
+  border-radius:14px !important;
+  background:linear-gradient(135deg,#0f3d25,#1f5e3b) !important;
+  color:white !important;
+  font-size:15px !important;
+  font-weight:900 !important;
+  box-shadow:none !important;
+}
+@media(max-width:980px){
+  .top-strip{padding-right:12px !important;}
+  .top-actions{position:absolute;right:14px;top:14px;margin-left:0;}
+  .azioni-btn{min-width:118px !important;height:44px !important;font-size:14px !important;padding:0 14px !important;}
+  .more-panel{top:52px;right:0;min-width:210px;}
+}
+@media(max-width:520px){
+  .search-card-solo-cerca{grid-template-columns:1fr !important;}
+  .top-strip{padding-top:70px !important;}
+  .top-actions{right:12px;top:12px;}
+  .azioni-btn{min-width:112px !important;height:42px !important;font-size:13px !important;}
+  .more-panel{top:50px;right:0;min-width:205px;}
+}
+@media print{.top-actions{display:none!important}}
+</style>
 </head><body>
 
 <div id="passwordBox" style="position:fixed;inset:0;background:#eef3f7;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px">
@@ -206,12 +362,20 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
       <div id="oraOggiGrande" class="strip-time">--:--</div>
     </div>
     <span id="firebaseStatus" class="firebase-status">Firebase offline</span>
+    <div class="top-actions">
+      <button id="menuAzioniBtn" class="azioni-btn" type="button" aria-label="Apri menu azioni">⚙️ Azioni ▾</button>
+      <div id="menuAzioniPanel" class="more-panel">
+        <button id="reportOggiBtn" type="button">📄 Report oggi</button>
+        <button id="reportMeseBtn" type="button">📅 Report mese</button>
+        <button id="excelBtn" type="button">📊 Excel</button>
+        <button id="stampaBtn" type="button">🖨️ Stampa/PDF</button>
+      </div>
+    </div>
   </section>
 
-  <section class="search-card">
+  <section class="search-card search-card-solo-cerca">
     <input id="ricerca" placeholder="Cerca cliente o telefono...">
     <button id="cercaBtn">Cerca</button>
-    <button id="stampaBtn">Stampa/PDF</button>
   </section>
 
   <div class="dashboard ghost-dashboard">
@@ -263,13 +427,15 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
     <div class="side-column">
       <div class="panel calendar-card">
         <h3>📅 Calendario</h3>
+        <div class="calendar-legend">
+          <span class="legend-title">Legenda</span>
+          <span class="badge bb">B&amp;B</span>
+          <span class="badge mp">Mezza Pensione</span>
+          <span class="badge pc">Pensione Completa</span>
+          <span class="badge vuota">Libera</span>
+        </div>
         <div class="calendar-top"><button id="prevMonth">‹</button><input id="meseCalendario" type="month"><button id="nextMonth">›</button></div>
         <div class="calendar" id="calendario"></div>
-      </div>
-      <div class="quick-actions">
-        <button id="reportOggiTop" type="button">Report oggi</button>
-        <button id="reportMeseTop" type="button">Report mese</button>
-        <button id="excelTop" type="button">Excel</button>
       </div>
     </div>
   </section>
@@ -332,12 +498,6 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
 
   <div class="booking-list"><b>Prenotazioni di questa camera</b><div id="listaPrenotazioni"></div></div>
 </div></div>
-
-<div class="bottom">
-  <button id="reportOggiBtn">Report oggi</button>
-  <button id="reportMeseBtn">Report mese</button>
-  <button id="excelBtn">Excel</button>
-</div>
 
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-database-compat.js"></script>
@@ -786,7 +946,7 @@ function disegnaCalendario(){
 
       let ev=document.createElement("div");
       ev.className="event "+(b.formula||"bb");
-      ev.innerHTML="<b>C."+c+"</b> - "+(b.persone||0)+" persone";
+      ev.innerHTML="<b>C"+c+"</b> • "+(b.persone||0)+" pers.";
       ev.onclick=()=>{
         apriCamera(c);
         caricaBooking(b.id);
@@ -1120,7 +1280,7 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
       </div>
       <div class="legenda-box">
         <div class="legenda">
-          <h3>Legenda</h3>
+          <h3>Legenda</h3><div class='formula-legenda'><span class='bb'>B&B</span><span class='mp'>Mezza pensione</span><span class='pc'>Pensione completa</span><span class='fr'>Libera</span></div>
           <table>
             <tr><td class="bb">B&B</td></tr>
             <tr><td class="mp">Mezza Pensione</td></tr>
@@ -1132,7 +1292,8 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
         </div>
       </div>
     </div>
-  </body>
+  
+</body>
   </html>`;
 
   let file = new Blob([html], {type:"application/vnd.ms-excel;charset=utf-8"});
@@ -1221,8 +1382,9 @@ function aggiornaSmartDashboard(){
 
   if(stanze){
     stanze.innerHTML = camere.map(c=>{
-      const occupata = (datiCamere[c]||[]).some(b=>bookingNelGiorno(b,oggi));
-      return "<span class='room-dot "+(occupata?"occupied":"free")+"' onclick='apriCamera(\""+c+"\")'>"+c+"</span>";
+      const booking = (datiCamere[c]||[]).find(b=>bookingNelGiorno(b,oggi));
+      const cls = booking ? (booking.formula || "bb") : "free";
+      return "<span class='room-dot "+cls+"' onclick='apriCamera(\""+c+"\")'>"+c+"</span>";
     }).join("");
   }
 
@@ -1501,7 +1663,8 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
 </style>
 
 </head>
-      <body>${report}</body>
+      <body>${report}
+</body>
       </html>
     `);
 
@@ -1515,7 +1678,127 @@ meseCalendario.addEventListener("change",disegnaCalendario);
 prevMonth.addEventListener("click",()=>cambiaMese(-1));
 nextMonth.addEventListener("click",()=>cambiaMese(1));
 
+
+
+const menuAzioniBtn = document.getElementById("menuAzioniBtn");
+const menuAzioniPanel = document.getElementById("menuAzioniPanel");
+if(menuAzioniBtn && menuAzioniPanel){
+  menuAzioniBtn.addEventListener("click", function(e){
+    e.stopPropagation();
+    menuAzioniPanel.classList.toggle("aperto");
+  });
+  menuAzioniPanel.querySelectorAll("button").forEach(function(btn){
+    btn.addEventListener("click", function(){ menuAzioniPanel.classList.remove("aperto"); });
+  });
+  document.addEventListener("click", function(e){
+    if(!menuAzioniPanel.contains(e.target) && e.target !== menuAzioniBtn){
+      menuAzioniPanel.classList.remove("aperto");
+    }
+  });
+}
+
 meseCalendario.value=formattaMeseInput(new Date());
 aggiornaTutto();
 avviaFirebase();
-</script></body></html>
+</script>
+<style id="fix-5-3-calendario-grande">
+/* ===== Camere Bontà 5.3 - calendario davvero grande, mappa molto piccola ===== */
+.app-shell{max-width:1600px !important;padding-left:10px !important;padding-right:10px !important;}
+.workspace{
+  display:grid !important;
+  grid-template-columns:220px minmax(0,1fr) !important;
+  gap:12px !important;
+  align-items:start !important;
+}
+.card-mappa{
+  width:220px !important;
+  max-width:220px !important;
+  padding:8px !important;
+  border-radius:16px !important;
+}
+.card-mappa .section-title{font-size:14px !important;margin:0 0 6px 2px !important;}
+.legenda-mappa{gap:3px !important;padding:0 0 6px !important;margin:0 0 6px !important;justify-content:flex-start !important;}
+.legenda-mappa .badge{font-size:8px !important;padding:4px 5px !important;border-radius:10px !important;}
+.card-mappa .riga{gap:3px !important;margin-bottom:7px !important;}
+.card-mappa .riga6{margin-left:62px !important;}
+.card-mappa .riga78{margin-left:35px !important;}
+.card-mappa .riga12{margin-left:0 !important;}
+.card-mappa .camera{width:46px !important;height:50px !important;border-radius:10px !important;padding:3px !important;box-shadow:0 3px 8px rgba(0,0,0,.13) !important;}
+.card-mappa .numero{font-size:15px !important;line-height:1 !important;}
+.card-mappa .nome{font-size:6px !important;line-height:1.05 !important;margin-top:2px !important;max-height:14px !important;overflow:hidden !important;}
+.card-mappa .checkout{display:none !important;}
+.side-column{min-width:0 !important;width:100% !important;}
+.calendar-card{width:100% !important;padding:18px !important;border-radius:22px !important;}
+.calendar-card h3{font-size:28px !important;margin-bottom:14px !important;}
+.calendar-top{gap:10px !important;margin-bottom:14px !important;}
+.calendar-top button{width:62px !important;height:54px !important;padding:0 !important;font-size:26px !important;}
+.calendar-top input{height:54px !important;font-size:19px !important;font-weight:900 !important;}
+.calendar{gap:8px !important;width:100% !important;}
+.day-name{font-size:15px !important;padding:5px 0 !important;}
+.day{min-height:150px !important;font-size:14px !important;padding:8px !important;border-radius:14px !important;overflow:auto !important;}
+.date{font-size:16px !important;margin-bottom:6px !important;}
+.event{display:block !important;width:100% !important;white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;font-size:12px !important;line-height:1.1 !important;padding:5px 6px !important;margin:3px 0 !important;border-radius:8px !important;}
+
+@media(max-width:980px){
+  .workspace{display:flex !important;flex-direction:column !important;gap:10px !important;}
+  .side-column{order:1 !important;width:100% !important;}
+  .card-mappa{order:2 !important;width:100% !important;max-width:none !important;padding:7px !important;}
+  .card-mappa .section-title{font-size:13px !important;margin-bottom:5px !important;}
+  .legenda-mappa{padding-bottom:5px !important;margin-bottom:5px !important;}
+  .legenda-mappa .badge{font-size:8px !important;padding:3px 5px !important;}
+  .card-mappa .riga{gap:3px !important;margin-bottom:5px !important;justify-content:center !important;}
+  .card-mappa .riga6{margin-left:0 !important;justify-content:center !important;}
+  .card-mappa .riga78{margin-left:0 !important;justify-content:center !important;}
+  .card-mappa .riga12{margin-left:0 !important;justify-content:center !important;}
+  .card-mappa .camera{width:40px !important;height:42px !important;border-radius:9px !important;padding:2px !important;}
+  .card-mappa .numero{font-size:14px !important;}
+  .card-mappa .nome{display:none !important;}
+  .calendar-card{padding:10px !important;border-radius:18px !important;}
+  .calendar-card h3{font-size:23px !important;margin-bottom:10px !important;}
+  .calendar-top button{width:44px !important;height:44px !important;font-size:22px !important;}
+  .calendar-top input{height:44px !important;font-size:16px !important;}
+  .calendar{gap:3px !important;}
+  .day-name{font-size:11px !important;padding:3px 0 !important;}
+  .day{min-height:125px !important;padding:4px !important;border-radius:9px !important;font-size:11px !important;}
+  .date{font-size:13px !important;margin-bottom:3px !important;}
+  .event{font-size:10px !important;padding:3px 4px !important;margin:2px 0 !important;white-space:nowrap !important;}
+}
+
+@media(max-width:430px){
+  .app-shell{padding-left:4px !important;padding-right:4px !important;}
+  .calendar-card{padding:6px !important;}
+  .calendar{gap:2px !important;}
+  .day{min-height:118px !important;padding:3px !important;border-radius:7px !important;}
+  .event{font-size:9px !important;letter-spacing:-.2px !important;}
+  .card-mappa .camera{width:36px !important;height:38px !important;}
+  .card-mappa .numero{font-size:13px !important;}
+}
+</style>
+
+
+<style id="camere-bonta-6-2-fix-definitivo">
+/* FIX DEFINITIVO: file apribile + calendario grande */
+.card-mappa,.mappa{display:none!important;}
+.workspace{display:block!important;width:100%!important;}
+.side-column{width:100%!important;max-width:none!important;}
+.calendar-card{width:100%!important;margin:0!important;padding:18px!important;}
+.calendar{grid-template-columns:repeat(7,minmax(0,1fr))!important;gap:8px!important;width:100%!important;}
+.day{min-height:150px!important;padding:8px!important;border-radius:14px!important;overflow:auto!important;}
+.day-name{font-size:15px!important;padding:6px 0!important;}
+.date{font-size:16px!important;margin-bottom:6px!important;}
+.event{display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;font-size:12px!important;line-height:1.15!important;padding:5px 6px!important;margin:3px 0!important;}
+.room-dot.bb{background:#3498db!important;color:#fff!important;}
+.room-dot.mp{background:#f1c40f!important;color:#111!important;}
+.room-dot.pc{background:#2ecc71!important;color:#fff!important;}
+.room-dot.free{background:#dfe6e9!important;color:#555!important;}
+@media(max-width:520px){
+ .app-shell{padding-left:4px!important;padding-right:4px!important;}
+ .calendar-card{padding:6px!important;border-radius:16px!important;}
+ .calendar{gap:2px!important;}
+ .day{min-height:118px!important;padding:3px!important;border-radius:7px!important;}
+ .day-name{font-size:10px!important;}
+ .date{font-size:12px!important;margin-bottom:3px!important;}
+ .event{font-size:9px!important;padding:3px!important;margin:2px 0!important;letter-spacing:-.2px!important;}
+}
+</style>
+</body></html>
