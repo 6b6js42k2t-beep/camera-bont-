@@ -333,6 +333,28 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
 }
 @media print{.top-actions{display:none!important}}
 </style>
+
+<style>
+/* Camere Bontà 7.1 - giorno calendario ingrandito e dettaglio senza incasso */
+.day{cursor:pointer;transition:transform .18s ease, box-shadow .18s ease, background .18s ease, border-color .18s ease;position:relative;z-index:1}
+.day.selected-day{transform:scale(1.08);z-index:8!important;border:2px solid #1f5e3b!important;background:#f2f7ee!important;box-shadow:0 14px 30px rgba(31,94,59,.22)!important}
+.day.selected-day .date{font-size:17px!important;color:#0f3d25!important}
+.day.selected-day .event{font-size:12px!important;padding:6px 7px!important}
+.event{white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+.selected-day-card{display:none;margin:14px 0 0;background:#fffdf8;border:1px solid rgba(31,94,59,.14);border-radius:20px;padding:16px;box-shadow:0 8px 22px rgba(31,94,59,.12)}
+.selected-day-card.aperta{display:block}
+.selected-day-card h3{margin:0 0 10px;color:#0f3d25;font-size:21px;font-weight:950}
+.selected-summary{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 12px}
+.summary-pill{background:#f2f7ee;border:1px solid rgba(31,94,59,.12);border-radius:999px;padding:7px 11px;font-weight:900;color:#1f5e3b}
+.selected-booking-list{display:flex;flex-direction:column;gap:8px}
+.selected-booking-item{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#f6f8f4;border:1px solid rgba(31,94,59,.10);border-left:6px solid #1f5e3b;border-radius:14px;padding:10px 12px;font-weight:900;cursor:pointer}
+.selected-booking-item:hover{background:#eef5ef}
+.selected-booking-item.bb{border-left-color:#3498db}
+.selected-booking-item.mp{border-left-color:#f1c40f}
+.selected-booking-item.pc{border-left-color:#2ecc71}
+.selected-booking-item .mini-text{font-size:12px;color:#6b756d;font-weight:800}
+@media(max-width:520px){.day.selected-day{transform:scale(1.04)!important}.day.selected-day .date{font-size:13px!important}.day.selected-day .event{font-size:10px!important;padding:4px!important}.selected-day-card{padding:12px;border-radius:16px;margin-top:10px}.selected-day-card h3{font-size:18px}.selected-booking-item{display:block;padding:10px}}
+</style>
 </head><body>
 
 <div id="passwordBox" style="position:fixed;inset:0;background:#eef3f7;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px">
@@ -436,6 +458,7 @@ body{background:linear-gradient(180deg,#f9f4ea 0%,#fffdf8 38%,#eef5ef 100%)!impo
         </div>
         <div class="calendar-top"><button id="prevMonth">‹</button><input id="meseCalendario" type="month"><button id="nextMonth">›</button></div>
         <div class="calendar" id="calendario"></div>
+        <div id="giornoSelezionatoBox" class="selected-day-card"></div>
       </div>
     </div>
   </section>
@@ -907,6 +930,54 @@ function aggiornaDashboard(){
   aggiornaSmartDashboard();
 }
 
+let giornoCalendarioSelezionato = null;
+
+function testoEventoCalendario(camera, booking){
+  return "C" + camera + " · " + (booking.persone || 0) + "👤 " + (booking.nome || "");
+}
+
+function mostraDettaglioGiorno(dataISO, cella){
+  giornoCalendarioSelezionato = dataISO;
+  document.querySelectorAll(".day").forEach(el => el.classList.remove("selected-day"));
+  if(cella) cella.classList.add("selected-day");
+
+  const box = document.getElementById("giornoSelezionatoBox");
+  if(!box) return;
+
+  const lista = prenotazioniDelGiorno(dataISO);
+  const ospiti = lista.reduce((tot,b)=>tot + Number(b.persone || 0), 0);
+  let html = "<h3>📅 " + dataLungaIt(dataISO) + "</h3>";
+  html += "<div class='selected-summary'>";
+  html += "<span class='summary-pill'>🏨 Camere occupate: " + lista.length + "</span>";
+  html += "<span class='summary-pill'>👥 Totale ospiti: " + ospiti + "</span>";
+  html += "</div>";
+
+  if(lista.length === 0){
+    html += "<div class='selected-booking-list'><div class='selected-booking-item'><div>Camere libere in questo giorno</div><span class='mini-text'>Nessuna prenotazione</span></div></div>";
+  }else{
+    html += "<div class='selected-booking-list'>";
+    lista.forEach(b=>{
+      html += "<div class='selected-booking-item " + (b.formula || "bb") + "' data-camera='" + b.camera + "' data-booking='" + b.id + "'>";
+      html += "<div>" + testoEventoCalendario(b.camera, b) + "</div>";
+      html += "<span class='mini-text'>" + nomeFormula(b.formula) + "</span>";
+      html += "</div>";
+    });
+    html += "</div>";
+  }
+
+  box.innerHTML = html;
+  box.classList.add("aperta");
+
+  box.querySelectorAll(".selected-booking-item[data-camera]").forEach(row => {
+    row.addEventListener("click", function(){
+      const camera = this.dataset.camera;
+      const booking = this.dataset.booking;
+      apriCamera(camera);
+      caricaBooking(booking);
+    });
+  });
+}
+
 function disegnaCalendario(){
   let val=meseCalendario.value;
   if(!val)return;
@@ -938,16 +1009,21 @@ function disegnaCalendario(){
     let occGiorno=occupateNelGiorno(data);
     let stato=occGiorno===0 ? "free" : (occGiorno>=camere.length ? "full" : "busy");
     let cell=document.createElement("div");
-    cell.className="day "+stato + (data===oggiISO()?" today":"");
+    cell.className="day "+stato + (data===oggiISO()?" today":"") + (data===giornoCalendarioSelezionato?" selected-day":"");
     cell.innerHTML="<div class='date'>"+giorno+" <small>"+occGiorno+"/"+camere.length+"</small></div>";
+    cell.addEventListener("click", function(){
+      mostraDettaglioGiorno(data, cell);
+    });
 
     camere.forEach(c=>(datiCamere[c]||[]).forEach(b=>{
       if(!bookingNelGiorno(b,data))return;
 
       let ev=document.createElement("div");
       ev.className="event "+(b.formula||"bb");
-      ev.innerHTML="<b>C"+c+"</b> • "+(b.persone||0)+" pers.";
-      ev.onclick=()=>{
+      ev.innerHTML=testoEventoCalendario(c, b);
+      ev.onclick=(e)=>{
+        e.stopPropagation();
+        mostraDettaglioGiorno(data, cell);
         apriCamera(c);
         caricaBooking(b.id);
       };
@@ -957,7 +1033,15 @@ function disegnaCalendario(){
 
     calendario.appendChild(cell);
   }
+
+  if(giornoCalendarioSelezionato && giornoCalendarioSelezionato.startsWith(val)){
+    setTimeout(()=>{
+      const cella=document.querySelector('.day.selected-day');
+      if(cella) mostraDettaglioGiorno(giornoCalendarioSelezionato,cella);
+    },0);
+  }
 }
+
 
 function tuttePrenotazioni(){
   let out=[];
